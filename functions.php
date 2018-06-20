@@ -16,19 +16,3 @@
         $data = explode("***", $logs);
         return $data;
     }
-
-    function printArray($arr){
-        foreach ($arr as $k => $v){
-            //echo "<p>" . $v['User'] . "; " . $v['Text'] . "; ". $v['Date']  . "</p>";
-
-            //variables can be returned!
-            $user = $v['User'];
-            $text = $v['Text'];
-            $date = $v['Date'];
-
-            echo "<p>User : {$user}<br>
-                     Text : {$text}<br>
-                     Date : {$date}<br>
-                  </p>";
-        }
-    }

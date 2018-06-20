@@ -1,0 +1,13 @@
+.form {
+    text-align: center;
+    border: 1px solid #cccccc;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.field {
+    border: 1px solid #cccccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #F7F7F7;
+}
