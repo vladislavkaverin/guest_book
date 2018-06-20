@@ -19,8 +19,8 @@
 </head>
 <body>
     <form method="post">
-        <p><input placeholder="Name" name="user" ></b></p>
-        <p><textarea placeholder="Text" cols="30" rows="10" name="text"></textarea></p>
+        <p><input placeholder="Name" name="user" required></b></p>
+        <p><textarea placeholder="Text" cols="30" rows="10" name="text" required></textarea></p>
         <p><input type="submit" value="Send"></p>
     </form>
 
