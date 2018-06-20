@@ -8,33 +8,35 @@
 
     require_once ('functions.php');
 
-    define("pathFile", "file.txt");
+    define("PATH_FILE", "file.txt");
 
     if(isset($_POST["user"]) && isset($_POST["text"])){
-        $user = htmlspecialchars($_POST["user"]);
-        $text = htmlspecialchars($_POST["text"]);
-        $date = date("F j, Y, g:i a"); // March 10, 2001, 5:16 pm
-        $query = "{$user}|\n{$text}|\n{$date}|\n***\n";
-
-        writeInFile(pathFile, $query);
+        /* write info in file */
+        writeInFile(PATH_FILE);
         header("Location: index.php");
     }
 
-    $data = readWithFile(pathFile);
+    if (file_exists(PATH_FILE)){
+        /* read info with file */
+        $data = readWithFile(PATH_FILE);
 
-    array_pop($data); //delete last "clear area" in file after '***'
+        /* delete last "clear area" in file (after '***') */
+        array_pop($data);
 
-    foreach ($data as $value){
-        $username = explode("|", $value);
-        $arrField[] = [
-            'User' => $username[0],
-            'Text' => $username[1],
-            'Date' => $username[2]
-        ];
+        foreach ($data as $value){
+            $username = explode("|", $value);
+            $arrField[] = [
+                'User' => $username[0],
+                'Text' => $username[1],
+                'Date' => $username[2]
+            ];
+        }
+
+        /* reverse array for correct show (time) */
+        if (!empty($arrField)){
+            $arrField = array_reverse($arrField);
+        }
     }
-
-    $arrField = array_reverse($arrField);
-
 ?>
 
 <!doctype html>
