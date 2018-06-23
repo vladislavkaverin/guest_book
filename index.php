@@ -6,36 +6,10 @@
  * Time: 13:31
  */
 
-    require_once ('functions.php');
-
     define("PATH_FILE", "file.txt");
 
     if(isset($_POST["user"]) && isset($_POST["text"])){
-        /* write info in file */
-        writeInFile(PATH_FILE);
-        header("Location: index.php");
-    }
-
-    if (file_exists(PATH_FILE)){
-        /* read info with file */
-        $data = readWithFile(PATH_FILE);
-
-        /* delete last "clear area" in file (after '***') */
-        array_pop($data);
-
-        foreach ($data as $value){
-            $username = explode("|", $value);
-            $arrField[] = [
-                'User' => $username[0],
-                'Text' => $username[1],
-                'Date' => $username[2]
-            ];
-        }
-
-        /* reverse array for correct show (time) */
-        if (!empty($arrField)){
-            $arrField = array_reverse($arrField);
-        }
+        /* write info in DB */
     }
 ?>
 
