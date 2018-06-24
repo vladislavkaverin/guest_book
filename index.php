@@ -8,28 +8,24 @@
 
     require_once ('infoDB.php');
 
-    if(isset($_POST["user"]) && isset($_POST["text"])){
-        $db = mysqli_connect($host, $admin, $password, "$db") or die("Error connection!");
-        mysqli_set_charset($db, "utf8") or die("Error install charset!");
+    $db = mysqli_connect($host, $admin, $password, "$db") or die("Error connection!");
+    mysqli_set_charset($db, "utf8") or die("Error install charset!");
 
+    if(isset($_POST["user"]) && isset($_POST["text"])){
         $user = mysqli_real_escape_string($db, htmlspecialchars($_POST["user"]));
         $text = mysqli_real_escape_string($db, htmlspecialchars($_POST["text"]));
 
         $queryInsert = "INSERT INTO `users` (`user`, `text`) VALUES ('$user', '$text')";
         mysqli_query($db, $queryInsert) or die(mysqli_error($db));
 
-        $querySelect = "SELECT `user`, `text`, `date` FROM `users` ORDER BY `date` DESC";
-        $res = mysqli_query($db, $querySelect);
-
-        $arrField = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-        //header("Location: {$_SERVER['PHP_SELF']}");
-        //exit();
-        //создать таблицу в бд
-        //передать в query переменные
-        //получить массив с бд и вывести его наоборот =)
-        //проблема f5
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
     }
+
+    $querySelect = "SELECT `user`, `text`, `date` FROM `users` ORDER BY `date` DESC";
+    $res = mysqli_query($db, $querySelect);
+
+    $arrField = mysqli_fetch_all($res, MYSQLI_ASSOC);
 ?>
 
 <!doctype html>
@@ -66,4 +62,3 @@
 
 </body>
 </html>
-
