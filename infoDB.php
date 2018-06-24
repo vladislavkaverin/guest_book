@@ -7,6 +7,6 @@
  */
 
     $host = "localhost";
-    $user = "root";
+    $admin = "root";
     $password = "1234";
     $db = "guest_book";

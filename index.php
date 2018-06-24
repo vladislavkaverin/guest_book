@@ -6,10 +6,29 @@
  * Time: 13:31
  */
 
-    define("PATH_FILE", "file.txt");
+    require_once ('infoDB.php');
 
     if(isset($_POST["user"]) && isset($_POST["text"])){
-        /* write info in DB */
+        $db = mysqli_connect($host, $admin, $password, "$db") or die("Error connection!");
+        mysqli_set_charset($db, "utf8") or die("Error install charset!");
+
+        $user = mysqli_real_escape_string($db, htmlspecialchars($_POST["user"]));
+        $text = mysqli_real_escape_string($db, htmlspecialchars($_POST["text"]));
+
+        $queryInsert = "INSERT INTO `users` (`user`, `text`) VALUES ('$user', '$text')";
+        mysqli_query($db, $queryInsert) or die(mysqli_error($db));
+
+        $querySelect = "SELECT `user`, `text`, `date` FROM `users` ORDER BY `date` DESC";
+        $res = mysqli_query($db, $querySelect);
+
+        $arrField = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+        //header("Location: {$_SERVER['PHP_SELF']}");
+        //exit();
+        //создать таблицу в бд
+        //передать в query переменные
+        //получить массив с бд и вывести его наоборот =)
+        //проблема f5
     }
 ?>
 
@@ -37,10 +56,10 @@
 
 <hr>
     <?php if (!empty($arrField)): ?>
-        <?php foreach($arrField as $index => $values): ?>
+        <?php foreach($arrField as $index): ?>
             <div class="field">
-                <p>Author: <?=$values['User']?> | Date: <?=$values['Date']?></p>
-                <div><?=$values['Text']?></div>
+                <p>Author: <?=$index['user']?> | Date: <?=$index['date']?></p>
+                <div><?=$index['text']?></div>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
